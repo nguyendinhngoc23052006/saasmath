@@ -31,16 +31,24 @@ Build reads these env vars (all optional):
 
 ## Deploy
 
-`.github/workflows/deploy.yml` runs tests + typecheck + build on every push,
-then publishes `dist/` to Cloudflare Pages on merges to `main`. Requires
-these repo secrets:
+Cloudflare Pages deploys directly from this repo via its native Git
+integration. One-time setup in the Cloudflare dashboard:
 
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
+1. Workers & Pages → Create → Pages → Connect to Git → pick this repo
+2. Production branch: `main`
+3. Framework preset: `Astro`
+4. Build command: `npm run build`
+5. Build output directory: `dist`
+6. Environment variables (Settings → Environment variables), Production scope:
+   - `PUBLIC_SITE_URL` (default `https://saasmath.com`)
+   - `PUBLIC_ADSENSE_CLIENT` (set once AdSense returns your `ca-pub-...`)
+   - `PUBLIC_CF_ANALYTICS_TOKEN` (set after creating a Web Analytics site)
 
-And these repo variables (Settings → Secrets and variables → Actions):
+Every push to `main` triggers a production build. Every pull request gets a
+preview URL. No GitHub secrets or tokens required.
 
-- `PUBLIC_SITE_URL`, `PUBLIC_ADSENSE_CLIENT`, `PUBLIC_CF_ANALYTICS_TOKEN`
+`.github/workflows/ci.yml` runs `npm test` + `astro check` + `npm run build`
+on push and pull request as an independent quality gate. It does not deploy.
 
 ## Author data
 
