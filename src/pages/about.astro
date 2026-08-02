@@ -5,7 +5,7 @@ import { personSchema } from '@/lib/seo';
 ---
 <BaseLayout
   title="About"
-  description={`About ${AUTHOR.name}, the person behind saasmath.`}
+  description={`About ${AUTHOR.name} (${AUTHOR.nickname}), the person behind saasmath.`}
   pathname="/about"
   jsonLd={personSchema()}
 >
@@ -23,19 +23,35 @@ import { personSchema } from '@/lib/seo';
     </p>
 
     <div class="not-prose flex gap-4 items-start mt-8 rounded-lg border border-ink-200 bg-ink-50/40 p-5">
-      <img src={AUTHOR.photo} alt={AUTHOR.name} width="96" height="96" class="h-24 w-24 rounded-full object-cover bg-ink-100" />
+      <img src={AUTHOR.photo} alt={`${AUTHOR.nickname} — ${AUTHOR.name}`} width="96" height="96" class="h-24 w-24 rounded-full object-cover bg-ink-100" loading="lazy" />
       <div>
-        <div class="font-semibold text-ink-900 text-lg">{AUTHOR.name}</div>
+        <div class="font-semibold text-ink-900 text-lg">
+          {AUTHOR.name} <span class="text-ink-500 font-normal">({AUTHOR.nickname})</span>
+        </div>
         <div class="text-sm text-ink-500">{AUTHOR.credentials}</div>
+        <div class="text-sm text-ink-500">{AUTHOR.location}</div>
         <p class="mt-2 text-sm text-ink-700 leading-6">{AUTHOR.bio}</p>
         <div class="mt-2 flex flex-wrap gap-3 text-sm">
-          {AUTHOR.links.linkedin && <a href={AUTHOR.links.linkedin} rel="me">LinkedIn</a>}
-          {AUTHOR.links.github && <a href={AUTHOR.links.github} rel="me">GitHub</a>}
-          {AUTHOR.links.website && <a href={AUTHOR.links.website} rel="me">Website</a>}
+          {AUTHOR.links.website && <a href={AUTHOR.links.website} rel="me author">Portfolio</a>}
+          {AUTHOR.links.github && <a href={AUTHOR.links.github} rel="me author">GitHub</a>}
+          {AUTHOR.links.linkedin && <a href={AUTHOR.links.linkedin} rel="me author">LinkedIn</a>}
           <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>
         </div>
       </div>
     </div>
+
+    <h2>Why economics, not CS</h2>
+    <p>
+      International economics at Foreign Trade University trained me to reason about incentives,
+      cost structures, and second-order effects before writing a line of code. The engineering
+      side is self-taught: production TypeScript, Cloudflare edge deploys, AI-directed pipelines,
+      the whole stack. Self-taught means I picked up every tool because I needed it, and I
+      understand it end to end.
+    </p>
+    <p>
+      For a site about SaaS finance, that combination is the point. The formulas are financial;
+      the runtime is engineering; the calculators need both to be right.
+    </p>
 
     <h2>Editorial standards</h2>
     <ul>
@@ -54,7 +70,14 @@ import { personSchema } from '@/lib/seo';
     <h2>How the site pays for itself</h2>
     <p>
       Display ads (Google AdSense) and a small number of clearly disclosed affiliate links to
-      tools the site actually recommends. No sponsored posts. No paid rankings.
+      tools the site actually recommends. No sponsored posts. No paid rankings. Full policy at
+      <a href="/privacy">/privacy</a>.
+    </p>
+
+    <h2>Other things I've shipped</h2>
+    <p>
+      Portfolio and source code at <a href={AUTHOR.links.website} rel="noopener">nguyendinhngoc.dev</a>.
+      Every project there is live in production with source on GitHub — same rule as this site.
     </p>
   </article>
 </BaseLayout>
