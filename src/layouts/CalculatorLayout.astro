@@ -1,0 +1,76 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import AnchorAd from '@/components/ads/AnchorAd.astro';
+import InArticleAd from '@/components/ads/InArticleAd.astro';
+import FooterAd from '@/components/ads/FooterAd.astro';
+import RelatedCalculators from '@/components/RelatedCalculators.astro';
+import Sources from '@/components/Sources.astro';
+import Faq from '@/components/Faq.astro';
+import AuthorCard from '@/components/AuthorCard.astro';
+import { breadcrumbSchema, calculatorSchema, faqSchema, canonical } from '@/lib/seo';
+import { SITE } from '@/data/site';
+
+interface Props {
+  title: string;
+  h1: string;
+  description: string;
+  slug: string;
+  intro: string;
+  formulaPlain: string;
+  sources: { label: string; url: string }[];
+  faqs: { q: string; a: string }[];
+  related?: string[];
+}
+
+const { title, h1, description, slug, intro, formulaPlain, sources, faqs, related = [] } = Astro.props;
+const pathname = `/calculators/${slug}`;
+const url = canonical(pathname);
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url },
+    { name: 'Calculators', url: `${SITE.url}/calculators` },
+    { name: h1, url },
+  ]),
+  calculatorSchema({ name: h1, description, url, slug }),
+  faqSchema(faqs),
+];
+---
+<BaseLayout title={title} description={description} pathname={pathname} jsonLd={schemas}>
+  <article class="mx-auto max-w-3xl px-4 py-8">
+    <nav aria-label="Breadcrumb" class="text-xs text-ink-500 mb-4">
+      <a href="/" class="no-underline">Home</a>
+      <span class="mx-1">/</span>
+      <a href="/calculators" class="no-underline">Calculators</a>
+      <span class="mx-1">/</span>
+      <span>{h1}</span>
+    </nav>
+
+    <header class="mb-6">
+      <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-900">{h1}</h1>
+      <p class="mt-3 text-ink-700 leading-7">{intro}</p>
+    </header>
+
+    <section id="calculator" class="mb-8">
+      <slot />
+    </section>
+
+    <InArticleAd />
+
+    <section class="prose-tight mb-8">
+      <h2>The formula</h2>
+      <p>{formulaPlain}</p>
+    </section>
+
+    <Faq items={faqs} />
+
+    <Sources items={sources} />
+
+    <AuthorCard />
+
+    <RelatedCalculators exclude={slug} slugs={related} />
+
+    <FooterAd />
+  </article>
+  <AnchorAd />
+</BaseLayout>

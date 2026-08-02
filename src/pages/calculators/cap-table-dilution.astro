@@ -1,0 +1,27 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import CapTableCalculator from '@/components/calculators/CapTableCalculator.tsx';
+---
+<CalculatorLayout
+  title="Cap Table Dilution Calculator"
+  h1="Cap Table Dilution Calculator"
+  description="Compute post-money valuation, investor stake, and founder dilution from a priced round with option pool top-up. YC and Carta cited."
+  slug="cap-table-dilution"
+  intro="See what a priced round does to your ownership. Enter pre-money, round size, and pre-money option pool top-up; get post-money, investor stake, and your remaining ownership."
+  formulaPlain="Post-money equals pre-money plus round size. New investor stake equals round size divided by post-money. Total dilution equals investor stake plus option pool. Your new ownership equals prior ownership times (1 minus total dilution)."
+  sources={[
+    { label: 'Y Combinator: SAFE Primer', url: 'https://www.ycombinator.com/documents' },
+    { label: 'Carta: Dilution Explained', url: 'https://carta.com/blog/dilution/' },
+    { label: 'Fred Wilson: Employee Equity', url: 'https://avc.com/2010/11/employee-equity-how-much/' },
+  ]}
+  faqs={[
+    { q: 'Why is option pool top-up dilutive to founders only?', a: 'Because the top-up sits in the pre-money valuation. New investors dilute-proof themselves; existing shareholders (founders) absorb it.' },
+    { q: 'Can I negotiate the pool?', a: 'Yes. Ask for post-money treatment, smaller size (only what will be granted in 12 months), or shifted post-close.' },
+    { q: 'What if I have multiple share classes?', a: 'This calculator treats ownership as a single fully-diluted number. For preferred-vs-common breakdowns use a full waterfall model.' },
+    { q: 'Does this handle SAFEs?', a: 'No. SAFEs convert at the priced round; run this against the resulting priced round for the true dilution number.' },
+    { q: 'What is a healthy dilution per round?', a: 'Seed: 15–25%. Series A: 20–25%. Series B: 15–20%. Cumulative to Series B is typically 40–55% founder ownership remaining.' },
+  ]}
+  related={["seed-round", "bridge-round", "option-value"]}
+>
+  <CapTableCalculator client:load />
+</CalculatorLayout>

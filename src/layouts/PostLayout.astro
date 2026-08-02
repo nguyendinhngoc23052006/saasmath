@@ -1,0 +1,78 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import AnchorAd from '@/components/ads/AnchorAd.astro';
+import InArticleAd from '@/components/ads/InArticleAd.astro';
+import FooterAd from '@/components/ads/FooterAd.astro';
+import AuthorCard from '@/components/AuthorCard.astro';
+import RelatedCalculators from '@/components/RelatedCalculators.astro';
+import Sources from '@/components/Sources.astro';
+import Faq from '@/components/Faq.astro';
+import { articleSchema, breadcrumbSchema, faqSchema, canonical } from '@/lib/seo';
+import { SITE } from '@/data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  publishedAt: string;
+  updatedAt?: string;
+  pairedCalculator?: { slug: string; label: string };
+  sources: { label: string; url: string }[];
+  faqs: { q: string; a: string }[];
+  related?: string[];
+}
+
+const { title, description, slug, publishedAt, updatedAt, pairedCalculator, sources, faqs, related = [] } = Astro.props;
+const pathname = `/posts/${slug}`;
+const url = canonical(pathname);
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url },
+    { name: 'Writing', url: `${SITE.url}/posts` },
+    { name: title, url },
+  ]),
+  articleSchema({ title, description, url, datePublished: publishedAt, dateModified: updatedAt }),
+  faqSchema(faqs),
+];
+---
+<BaseLayout title={title} description={description} pathname={pathname} jsonLd={schemas}>
+  <article class="mx-auto max-w-3xl px-4 py-8">
+    <nav aria-label="Breadcrumb" class="text-xs text-ink-500 mb-4">
+      <a href="/" class="no-underline">Home</a>
+      <span class="mx-1">/</span>
+      <a href="/posts" class="no-underline">Writing</a>
+      <span class="mx-1">/</span>
+      <span>{title}</span>
+    </nav>
+    <header class="mb-6">
+      <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-900">{title}</h1>
+      <p class="mt-2 text-sm text-ink-500">
+        Published {publishedAt}{updatedAt && updatedAt !== publishedAt ? ` · updated ${updatedAt}` : ''}
+      </p>
+    </header>
+
+    <div class="prose-tight">
+      <slot />
+    </div>
+
+    {pairedCalculator && (
+      <a
+        href={`/calculators/${pairedCalculator.slug}`}
+        class="my-8 block rounded-lg border border-accent-500 bg-accent-500/5 p-5 no-underline hover:bg-accent-500/10"
+      >
+        <div class="text-xs uppercase tracking-wide text-accent-600">Try the calculator</div>
+        <div class="mt-1 text-lg font-semibold text-ink-900">{pairedCalculator.label}</div>
+        <div class="mt-1 text-sm text-ink-600">Interactive. Shareable via URL. No signup.</div>
+      </a>
+    )}
+
+    <InArticleAd />
+
+    <Faq items={faqs} />
+    <Sources items={sources} />
+    <AuthorCard />
+    <RelatedCalculators slugs={related} />
+    <FooterAd />
+  </article>
+  <AnchorAd />
+</BaseLayout>

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { AUTHOR } from '@/data/author';
+import { SITE } from '@/data/site';
+const updated = '2026-08-02';
+---
+<BaseLayout title="Privacy Policy" description="How saasmath handles data." pathname="/privacy">
+  <article class="mx-auto max-w-2xl px-4 py-10 prose-tight">
+    <h1>Privacy Policy</h1>
+    <p><em>Last updated {updated}.</em></p>
+
+    <p>
+      saasmath (the "site") is operated by {AUTHOR.name}. Contact:
+      <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>.
+    </p>
+
+    <h2>What we collect</h2>
+    <p>
+      Calculator inputs never leave your browser. They are stored in the page URL so you can share
+      results; nothing is sent to a server we control.
+    </p>
+    <p>
+      We use <strong>Cloudflare Web Analytics</strong> to count visits. It is cookie-less and does
+      not collect IP addresses, screen size, or behavioral fingerprints. See
+      <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener nofollow">Cloudflare's privacy policy</a>.
+    </p>
+    <p>
+      We serve ads via <strong>Google AdSense</strong>. Google and its partners may use cookies to
+      serve ads based on prior visits to this or other sites.
+      Personalized advertising by Google is disclosed at
+      <a href="https://policies.google.com/technologies/ads" rel="noopener nofollow">policies.google.com/technologies/ads</a>.
+      You can opt out at
+      <a href="https://www.google.com/settings/ads" rel="noopener nofollow">google.com/settings/ads</a>
+      or from third-party vendors at
+      <a href="https://www.aboutads.info/" rel="noopener nofollow">aboutads.info</a>.
+    </p>
+
+    <h2>Affiliate links</h2>
+    <p>
+      Some outbound links to third-party SaaS tools are affiliate links. If you sign up we may
+      earn a commission at no cost to you. Affiliate links are marked with
+      <code>rel="sponsored"</code> and do not affect editorial coverage.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions or requests to remove data: <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>.
+    </p>
+
+    <p class="text-xs text-ink-500">
+      This site is hosted at {SITE.url} on Cloudflare Pages.
+    </p>
+  </article>
+</BaseLayout>

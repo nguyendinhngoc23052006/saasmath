@@ -1,0 +1,18 @@
+---
+interface Props {
+  items: { label: string; url: string }[];
+}
+const { items } = Astro.props;
+---
+{items.length > 0 && (
+  <section class="mt-10">
+    <h2 class="text-2xl font-semibold tracking-tight text-ink-900 mb-3">Sources</h2>
+    <ol class="list-decimal pl-6 text-sm text-ink-700 space-y-1">
+      {items.map((s) => (
+        <li>
+          <a href={s.url} rel="noopener nofollow">{s.label}</a>
+        </li>
+      ))}
+    </ol>
+  </section>
+)}

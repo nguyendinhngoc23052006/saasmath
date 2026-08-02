@@ -1,0 +1,27 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import OptionValueCalculator from '@/components/calculators/OptionValueCalculator.tsx';
+---
+<CalculatorLayout
+  title="Employee Stock Option Value Calculator"
+  h1="Employee Stock Option Value Calculator"
+  description="Estimate the paper value today and expected exit value of a startup stock option grant given strike, FMV, dilution, and exit valuation. Carta and Holloway cited."
+  slug="option-value"
+  intro="Estimate what your startup option grant is worth today and at a plausible exit. Strike, current 409A, shares, vesting, exit valuation, and expected future dilution."
+  formulaPlain="Paper value equals shares times (409A minus strike). Exit ownership equals shares divided by shares outstanding, times (1 minus future dilution). Exit value gross equals exit valuation times exit ownership; net subtracts total strike cost."
+  sources={[
+    { label: 'Holloway Guide to Equity Compensation', url: 'https://www.holloway.com/g/equity-compensation' },
+    { label: 'Carta: Option Grants', url: 'https://carta.com/learn/equity/stock-options/' },
+    { label: 'Sam Altman: Employee Equity', url: 'https://blog.samaltman.com/employee-equity' },
+  ]}
+  faqs={[
+    { q: 'Does this include taxes?', a: 'No. ISOs, NSOs, AMT, ordinary income vs long-term capital gains, and state taxes are meaningful. Talk to a CPA before exercising.' },
+    { q: 'What is FMV / 409A?', a: 'The fair market value set by a third-party appraisal. Strike must equal or exceed FMV at grant.' },
+    { q: 'Why apply future dilution?', a: 'Every future round will reduce your ownership percentage. Investors dilute-proof themselves; employees do not.' },
+    { q: 'Is early exercise worth it?', a: 'Sometimes. It starts the long-term capital gains clock and can reduce AMT if done at grant. It also puts real cash at risk in a company that may fail.' },
+    { q: 'What if my strike is above FMV?', a: 'Paper value today is zero. The upside is only at exit above strike per share.' },
+  ]}
+  related={["cap-table-dilution", "seed-round", "bridge-round"]}
+>
+  <OptionValueCalculator client:load />
+</CalculatorLayout>

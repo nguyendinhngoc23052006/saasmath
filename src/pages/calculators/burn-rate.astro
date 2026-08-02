@@ -1,0 +1,27 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import BurnRateCalculator from '@/components/calculators/BurnRateCalculator.tsx';
+---
+<CalculatorLayout
+  title="Burn Rate Calculator"
+  h1="Burn Rate Calculator"
+  description="Compute gross burn, net burn, and burn multiple from starting and ending cash balances. Cite Bessemer's burn multiple framework."
+  slug="burn-rate"
+  intro="Burn rate is the monthly cash you consume. This calculator computes gross burn, net burn, and, if you enter ARR, Bessemer's burn multiple."
+  formulaPlain="Net burn per month is (starting cash minus ending cash) divided by months elapsed. Gross burn adds revenue back. Burn multiple is net burn annualised, divided by ARR."
+  sources={[
+    { label: 'Bessemer: The Burn Multiple', url: 'https://www.bvp.com/atlas/the-burn-multiple' },
+    { label: 'Bessemer State of the Cloud', url: 'https://www.bvp.com/atlas' },
+    { label: 'David Sacks: The Burn Multiple', url: 'https://sacks.substack.com/' },
+  ]}
+  faqs={[
+    { q: 'What is a good burn multiple?', a: 'Under 1 is elite. 1 to 2 is very good. 2 to 3 is fine at seed. Above 3 signals a growth-efficiency problem.' },
+    { q: 'Is burn multiple annual or monthly?', a: 'Annual: annualised net burn divided by net new ARR (or ARR itself, depending on how you scope it). We use net burn annualised divided by ARR as the simple approximation.' },
+    { q: 'Why does gross burn matter separately?', a: 'It exposes the cost base. Net burn can hide a bloated cost structure if revenue is temporarily inflated.' },
+    { q: 'How often should I re-measure?', a: 'Monthly. Comparing quarters smooths out spikes.' },
+    { q: 'Does capex count?', a: 'Yes for cash burn purposes. If you bought a server this month, it left the bank this month.' },
+  ]}
+  related={["runway", "rule-of-40", "quick-ratio", "seed-round"]}
+>
+  <BurnRateCalculator client:load />
+</CalculatorLayout>

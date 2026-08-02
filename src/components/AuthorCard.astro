@@ -1,0 +1,17 @@
+---
+import { AUTHOR } from '@/data/author';
+---
+<aside class="mt-10 rounded-lg border border-ink-200 bg-ink-50/40 p-5 flex gap-4 items-start">
+  <img src={AUTHOR.photo} alt={AUTHOR.name} width="64" height="64" class="h-16 w-16 rounded-full object-cover bg-ink-100" loading="lazy" />
+  <div>
+    <div class="text-sm font-semibold text-ink-900">{AUTHOR.name}</div>
+    <div class="text-xs text-ink-500">{AUTHOR.credentials}</div>
+    <p class="mt-2 text-sm text-ink-700 leading-6">{AUTHOR.bio}</p>
+    <div class="mt-2 flex flex-wrap gap-3 text-xs">
+      {AUTHOR.links.linkedin && <a href={AUTHOR.links.linkedin} rel="me author noopener">LinkedIn</a>}
+      {AUTHOR.links.github && <a href={AUTHOR.links.github} rel="me author noopener">GitHub</a>}
+      {AUTHOR.links.website && <a href={AUTHOR.links.website} rel="me author noopener">Website</a>}
+      <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>
+    </div>
+  </div>
+</aside>

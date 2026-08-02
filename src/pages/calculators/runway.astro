@@ -1,0 +1,27 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import RunwayCalculator from '@/components/calculators/RunwayCalculator.tsx';
+---
+<CalculatorLayout
+  title="Startup Runway Calculator"
+  h1="Startup Runway Calculator"
+  description="Calculate how many months of runway you have left. Enter cash on hand, monthly burn, and (optionally) monthly revenue. Shareable via URL."
+  slug="runway"
+  intro="Runway is how long your cash lasts at current net burn. Enter your bank balance, burn, and revenue; get months remaining and the date you hit zero."
+  formulaPlain="Runway in months equals cash on hand divided by monthly burn minus monthly revenue. If revenue meets or exceeds burn, runway is effectively infinite."
+  sources={[
+    { label: 'Y Combinator Startup Library: Managing Runway', url: 'https://www.ycombinator.com/library' },
+    { label: 'SaaStr: Runway Basics', url: 'https://www.saastr.com/' },
+    { label: 'Bessemer State of the Cloud', url: 'https://www.bvp.com/atlas' },
+  ]}
+  faqs={[
+    { q: 'What counts as monthly burn?', a: 'Every cash out the door: payroll (with employer taxes and benefits), rent, software, contractors, cloud, ads, refunds. Not accruals, not depreciation.' },
+    { q: 'Should I use gross or net burn?', a: 'Use net burn (burn minus revenue) for runway. Use gross burn to see the cost side alone.' },
+    { q: 'When should I start raising?', a: 'A common rule: start when you cross 9 months of runway; close before you drop below 6.' },
+    { q: 'Does this include accounts receivable?', a: 'No. Cash on hand means money in the bank you can spend today. Receivables that convert reliably can be added, but be conservative.' },
+    { q: 'What if I am profitable?', a: 'Net burn is zero or negative. Runway is infinite; the calculator shows "Profitable".' },
+  ]}
+  related={["burn-rate", "seed-round", "bridge-round", "mrr-arr-growth"]}
+>
+  <RunwayCalculator client:load />
+</CalculatorLayout>

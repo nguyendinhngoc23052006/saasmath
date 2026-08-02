@@ -1,0 +1,25 @@
+---
+import { ADSENSE_CLIENT } from '@/data/site';
+---
+{ADSENSE_CLIENT ? (
+  <div class="fixed inset-x-0 bottom-0 z-40 border-t border-ink-100 bg-white/95 backdrop-blur">
+    <div class="mx-auto max-w-6xl px-4 py-1">
+      <ins class="adsbygoogle block"
+        style="display:block;min-height:60px"
+        data-ad-client={ADSENSE_CLIENT}
+        data-ad-slot="anchor"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+      <script is:inline data-cf-beacon-skip>
+        (function () {
+          function mount() {
+            try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+          }
+          if (document.readyState === 'complete') requestIdleCallback ? requestIdleCallback(mount) : setTimeout(mount, 800);
+          else window.addEventListener('load', () => requestIdleCallback ? requestIdleCallback(mount) : setTimeout(mount, 800));
+        })();
+      </script>
+    </div>
+  </div>
+) : null}
