@@ -1,0 +1,28 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { AUTHOR } from '@/data/author';
+---
+<BaseLayout title="Contact" description="Get in touch with saasmath." pathname="/contact">
+  <article class="mx-auto max-w-2xl px-4 py-10 prose-tight">
+    <h1>Contact</h1>
+    <p>Email is the fastest way to reach me.</p>
+    <p><a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a></p>
+
+    <h2>What I read</h2>
+    <ul>
+      <li>Formula corrections. I take these seriously. Please include a source.</li>
+      <li>Requests for new calculators. Tell me the exact question you're trying to answer.</li>
+      <li>Guest post pitches from operators or investors. No content agencies.</li>
+      <li>Partnership inquiries from SaaS tools relevant to founder finance.</li>
+    </ul>
+
+    <h2>What I don't read</h2>
+    <ul>
+      <li>SEO service offers.</li>
+      <li>Link exchange requests.</li>
+      <li>Anything auto-generated.</li>
+    </ul>
+
+    <p>Response time is usually 1–3 business days.</p>
+  </article>
+</BaseLayout>

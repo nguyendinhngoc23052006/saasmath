@@ -1,0 +1,27 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import RuleOf40Calculator from '@/components/calculators/RuleOf40Calculator.tsx';
+---
+<CalculatorLayout
+  title="Rule of 40 Calculator"
+  h1="Rule of 40 Calculator"
+  description="Score your SaaS on the Rule of 40: growth rate plus profit margin. Passes at 40+. Compare against public SaaS benchmarks."
+  slug="rule-of-40"
+  intro="The Rule of 40 is Brad Feld's shorthand for balancing growth against profitability: a healthy SaaS scores 40 or higher on growth plus margin."
+  formulaPlain="Rule of 40 score equals year-over-year revenue growth (percent) plus profit margin (percent). Passes at 40 or higher."
+  sources={[
+    { label: 'Brad Feld: The Rule of 40%', url: 'https://feld.com/archives/2015/02/rule-40-healthy-saas-company/' },
+    { label: 'Meritech: Public SaaS Rule of 40', url: 'https://www.meritechcapital.com/' },
+    { label: 'SaaS Capital: Rule of 40 in Practice', url: 'https://www.saas-capital.com/' },
+  ]}
+  faqs={[
+    { q: 'Which margin do I use?', a: 'EBITDA margin is the classic input. Free-cash-flow margin is the version investors increasingly prefer because it exposes deferred cash costs.' },
+    { q: 'Does it apply below $10M ARR?', a: 'Not really. Below scale, most companies choose growth over margin and score below 40. It becomes meaningful past $25M ARR.' },
+    { q: 'Can a shrinking company pass?', a: 'Mathematically yes with a big enough margin. Practically no; investors will ignore the score.' },
+    { q: 'What is the elite band?', a: '60+ is elite territory. Snowflake and Datadog cleared 70+ at IPO scale.' },
+    { q: 'Where does this fail?', a: 'One-time revenue events (a large multi-year prepay) can inflate growth. Normalize before scoring.' },
+  ]}
+  related={["mrr-arr-growth", "burn-rate", "quick-ratio"]}
+>
+  <RuleOf40Calculator client:load />
+</CalculatorLayout>

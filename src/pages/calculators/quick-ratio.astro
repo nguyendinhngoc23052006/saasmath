@@ -1,0 +1,27 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import QuickRatioCalculator from '@/components/calculators/QuickRatioCalculator.tsx';
+---
+<CalculatorLayout
+  title="SaaS Quick Ratio Calculator"
+  h1="SaaS Quick Ratio Calculator"
+  description="Compute Mamoon Hamid's SaaS quick ratio: MRR gained divided by MRR lost. Interpret against the 4/2/1 benchmark bands."
+  slug="quick-ratio"
+  intro="The SaaS quick ratio measures growth efficiency: MRR gained (new + expansion) divided by MRR lost (churn + contraction)."
+  formulaPlain="Quick ratio equals (new MRR + expansion MRR) divided by (churned MRR + contraction MRR). Above 4 is excellent, 2 to 4 is good, below 2 is weak."
+  sources={[
+    { label: 'Mamoon Hamid: SaaS Quick Ratio', url: 'https://www.saastr.com/the-saas-quick-ratio-a-single-metric-that-matters/' },
+    { label: 'ProfitWell: Quick Ratio in Practice', url: 'https://www.profitwell.com/' },
+    { label: 'a16z: 16 Startup Metrics', url: 'https://a16z.com/16-startup-metrics/' },
+  ]}
+  faqs={[
+    { q: 'Why not just track net MRR?', a: 'Two companies with the same net MRR can have very different quick ratios. A 10x rate of gain vs loss is a different business than 1.1x.' },
+    { q: 'Is expansion revenue always good?', a: 'Yes for the ratio, but check whether it comes from price increases or actual usage. Price-driven expansion inflates the ratio without proving product-market fit.' },
+    { q: 'What counts as contraction?', a: 'Any downgrade in ARPU that is not a cancellation: plan downgrades, seat reductions, discount grants.' },
+    { q: 'Should this be a rolling average?', a: 'Yes. A single month can spike from one large customer. A trailing-3-month average is standard.' },
+    { q: 'Does this correlate with valuation?', a: 'Loosely. Investors weight it alongside growth rate, gross margin, and NRR.' },
+  ]}
+  related={["mrr-arr-growth", "ltv-cac", "rule-of-40"]}
+>
+  <QuickRatioCalculator client:load />
+</CalculatorLayout>

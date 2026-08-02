@@ -1,0 +1,39 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { AUTHOR } from '@/data/author';
+const updated = '2026-08-02';
+---
+<BaseLayout title="Terms of Use" description="Terms of use for saasmath." pathname="/terms">
+  <article class="mx-auto max-w-2xl px-4 py-10 prose-tight">
+    <h1>Terms of Use</h1>
+    <p><em>Last updated {updated}.</em></p>
+
+    <h2>Educational, not advice</h2>
+    <p>
+      Everything on saasmath is for education. It is not investment, tax, accounting, or legal
+      advice. Consult a qualified professional before making decisions based on any output of
+      any calculator on this site.
+    </p>
+
+    <h2>No warranty</h2>
+    <p>
+      The site is provided "as is" without warranty of any kind. Formulas can be wrong. Inputs
+      can be wrong. You are responsible for verifying anything that matters to your business.
+    </p>
+
+    <h2>Acceptable use</h2>
+    <p>
+      Don't scrape at high volume, don't attempt to bypass ad delivery, don't republish content
+      without attribution. Republishing under a Creative Commons attribution equivalent is fine
+      as long as you credit saasmath and link back.
+    </p>
+
+    <h2>Changes</h2>
+    <p>
+      Terms may change. The "last updated" date at the top reflects the most recent revision.
+    </p>
+
+    <h2>Contact</h2>
+    <p><a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a></p>
+  </article>
+</BaseLayout>

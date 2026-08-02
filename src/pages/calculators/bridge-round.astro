@@ -1,0 +1,27 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import BridgeRoundCalculator from '@/components/calculators/BridgeRoundCalculator.tsx';
+---
+<CalculatorLayout
+  title="Bridge Round Calculator"
+  h1="Bridge Round Calculator"
+  description="Size a bridge round on a SAFE or convertible note with valuation cap and discount. See effective valuation, dilution at conversion, and which term drives price."
+  slug="bridge-round"
+  intro="Bridge rounds usually take the form of a SAFE or convertible note with a cap and a discount. This calculator sizes the bridge, computes the effective valuation, and shows expected dilution at conversion."
+  formulaPlain="Bridge size equals additional runway needed times current monthly burn. Effective valuation equals min(cap, next pre-money × (1 minus discount)). Investors get whichever gives them more shares."
+  sources={[
+    { label: 'Y Combinator: SAFE Primer', url: 'https://www.ycombinator.com/documents' },
+    { label: 'Startup Lawyer: Convertible Note Math', url: 'https://www.startuplawyer.com/' },
+    { label: 'Fred Wilson: Notes vs Priced Rounds', url: 'https://avc.com/' },
+  ]}
+  faqs={[
+    { q: 'When should I do a bridge vs a priced round?', a: 'Bridge if the delay is small (3-9 months of runway) and you expect a higher valuation at the next round. Priced round if the gap is large or investors demand it.' },
+    { q: 'What is a market cap and discount?', a: 'US early-stage: 15-25% discount and a cap set 1.25-2x above the last round or the expected next pre-money.' },
+    { q: 'Does an uncapped note make sense?', a: 'Rarely. Uncapped means investors take unlimited upside risk with no ceiling on the price they pay. Only offered when the founder has extraordinary leverage.' },
+    { q: 'How is expected dilution computed?', a: 'Bridge size divided by (effective valuation + bridge size). This is a simplification; actual dilution depends on the priced round mechanics and any pro-rata rights.' },
+    { q: 'What if the next round never happens?', a: 'Notes have a maturity date and mandatory conversion terms. SAFEs sit until liquidity or dissolution. Read the doc; know the trigger.' },
+  ]}
+  related={["seed-round", "cap-table-dilution", "runway"]}
+>
+  <BridgeRoundCalculator client:load />
+</CalculatorLayout>

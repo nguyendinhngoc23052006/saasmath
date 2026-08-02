@@ -1,0 +1,58 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { CALCULATORS } from '@/data/calculators';
+import { SITE } from '@/data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.name,
+  url: SITE.url,
+  description: SITE.description,
+};
+---
+<BaseLayout title={SITE.title} description={SITE.description} pathname="/" jsonLd={jsonLd}>
+  <section class="mx-auto max-w-4xl px-4 pt-12 pb-8 text-center">
+    <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink-900">
+      Free calculators for SaaS founders
+    </h1>
+    <p class="mt-4 text-lg text-ink-700 max-w-2xl mx-auto leading-7">
+      Runway, burn, LTV/CAC, cap-table dilution, option value. Formulas straight from Skok, Feld,
+      Bessemer, and Y Combinator. Results are shareable via URL. No signup, no paywall.
+    </p>
+    <div class="mt-6 flex justify-center gap-3">
+      <a href="/calculators" class="rounded-md bg-accent-500 px-5 py-2.5 text-white no-underline hover:bg-accent-600">
+        Browse calculators
+      </a>
+      <a href="/posts" class="rounded-md border border-ink-200 px-5 py-2.5 text-ink-800 no-underline hover:border-accent-500">
+        Read the guides
+      </a>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-4 py-8">
+    <h2 class="text-2xl font-semibold tracking-tight text-ink-900 mb-4">All calculators</h2>
+    <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {CALCULATORS.map((c) => (
+        <li>
+          <a
+            href={`/calculators/${c.slug}`}
+            class="block h-full rounded-lg border border-ink-200 bg-white p-4 no-underline hover:border-accent-500"
+          >
+            <div class="font-semibold text-ink-900">{c.h1}</div>
+            <div class="mt-1 text-sm text-ink-600">{c.short}</div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-10 text-center">
+    <h2 class="text-2xl font-semibold tracking-tight text-ink-900">Why another calculator site</h2>
+    <p class="mt-3 text-ink-700 leading-7">
+      Because Baremetrics and ChartMogul need your Stripe key, NerdWallet is for mortgages,
+      and a founder shouldn't have to open a spreadsheet to answer "how long is my runway".
+      Every calculator on saasmath is one input away from a shareable answer.
+    </p>
+  </section>
+</BaseLayout>

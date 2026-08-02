@@ -1,0 +1,27 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import SeedRoundCalculator from '@/components/calculators/SeedRoundCalculator.tsx';
+---
+<CalculatorLayout
+  title="Seed Round Sizing Calculator"
+  h1="Seed Round Sizing Calculator"
+  description="Compute how much to raise for a seed round from target runway, team size, salary, and non-personnel burn. Returns valuation range at 15-25% dilution."
+  slug="seed-round"
+  intro="Reverse-engineer a seed round size from target runway. Enter your headcount, average salary, and non-personnel burn; get raise size and a valuation range at 15-25% dilution."
+  formulaPlain="Monthly burn equals (team × salary × 1.3) divided by 12, plus non-personnel monthly. Raise needed equals monthly burn times target runway months."
+  sources={[
+    { label: 'Peter Reinhardt: How Much To Raise', url: 'https://reinhardtluft.substack.com/' },
+    { label: 'SaaStr: How to Raise a Seed', url: 'https://www.saastr.com/' },
+    { label: 'Y Combinator: A Guide to Seed Fundraising', url: 'https://www.ycombinator.com/library' },
+  ]}
+  faqs={[
+    { q: 'Why the 1.3 overhead multiplier?', a: 'Employer taxes, benefits, and equipment typically add 20–35% on top of cash salary. 1.3x is a reasonable US baseline.' },
+    { q: 'Should I target 12, 18, or 24 months?', a: '18 months is the classic seed target: enough to hit a Series A milestone with a 3-month raise buffer.' },
+    { q: 'Is 15-25% dilution the right range?', a: 'It is the seed norm in 2024-25. Hot rounds close at 10-15%; slower rounds at 25-30%.' },
+    { q: 'What if I want to raise more?', a: 'Raise less, extend runway later. Every additional dollar today costs equity that compounds through subsequent rounds.' },
+    { q: 'Does this include founder salary?', a: 'Set your salary in the "average salary" input if you take one. Many seed founders pay themselves $50-90k US.' },
+  ]}
+  related={["runway", "cap-table-dilution", "bridge-round"]}
+>
+  <SeedRoundCalculator client:load />
+</CalculatorLayout>

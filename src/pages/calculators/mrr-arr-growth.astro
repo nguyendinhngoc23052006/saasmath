@@ -1,0 +1,27 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import MrrArrCalculator from '@/components/calculators/MrrArrCalculator.tsx';
+---
+<CalculatorLayout
+  title="MRR / ARR Growth Calculator"
+  h1="MRR / ARR Growth Calculator"
+  description="How many months to grow from current MRR to a target at a given monthly growth rate. Includes T2D3 benchmark and 12-month trajectory."
+  slug="mrr-arr-growth"
+  intro="Enter current MRR, target MRR, and a monthly growth rate. Get months to target, a 12-month trajectory, and a T2D3 comparison for context."
+  formulaPlain="Months equals natural log of (target / current) divided by natural log of (1 + monthly growth rate)."
+  sources={[
+    { label: 'Neeraj Agrawal: The SaaS Adventure (T2D3)', url: 'https://techcrunch.com/2015/02/01/the-saas-travel-adventure/' },
+    { label: 'Christoph Janz: 5 Ways to $100M ARR', url: 'https://christophjanz.blogspot.com/' },
+    { label: 'SaaStr: T2D3 in Practice', url: 'https://www.saastr.com/' },
+  ]}
+  faqs={[
+    { q: 'What is T2D3?', a: 'A benchmark growth trajectory from Neeraj Agrawal: after $1M ARR, triple (Y1), triple (Y2), double (Y3), double (Y4), double (Y5) to reach $100M.' },
+    { q: 'Is compound monthly growth realistic?', a: 'For short horizons at seed scale, yes. Compounding at 15% MoM for 24 months is not, because sales cycles lengthen with ACV.' },
+    { q: 'How do I convert annual to monthly growth?', a: 'Monthly growth equals (1 + annual)^(1/12) minus 1. 100% annual is roughly 5.9% monthly.' },
+    { q: 'Should I use gross or net MRR?', a: 'Net (new + expansion − churn − contraction) is what runway consumers see. Gross overstates.' },
+    { q: 'Why is my target month "Never"?', a: 'Because growth is zero or negative and your target is above current MRR. Increase the growth rate.' },
+  ]}
+  related={["ltv-cac", "quick-ratio", "rule-of-40"]}
+>
+  <MrrArrCalculator client:load />
+</CalculatorLayout>

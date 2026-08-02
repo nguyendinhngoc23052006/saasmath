@@ -1,0 +1,27 @@
+---
+import CalculatorLayout from '@/layouts/CalculatorLayout.astro';
+import LtvCacCalculator from '@/components/calculators/LtvCacCalculator.tsx';
+---
+<CalculatorLayout
+  title="LTV / CAC Calculator"
+  h1="LTV / CAC Ratio Calculator"
+  description="Compute customer lifetime value, LTV/CAC ratio, and payback period from ARPU, gross margin, monthly churn, and CAC. Skok's framework."
+  slug="ltv-cac"
+  intro="LTV/CAC tells you whether growth pays back. Enter ARPU, gross margin, monthly churn, and CAC; get lifetime value, the ratio, and payback period."
+  formulaPlain="LTV equals ARPU times gross margin, divided by monthly churn. Payback equals CAC divided by ARPU times gross margin. The ratio is LTV divided by CAC."
+  sources={[
+    { label: 'David Skok: SaaS Metrics 2.0', url: 'https://www.forentrepreneurs.com/saas-metrics-2/' },
+    { label: 'Bessemer: CAC Payback', url: 'https://www.bvp.com/atlas/cac-payback-period' },
+    { label: 'a16z: 16 Startup Metrics', url: 'https://a16z.com/16-startup-metrics/' },
+  ]}
+  faqs={[
+    { q: 'Why divide by churn to get LTV?', a: 'Under a constant-churn assumption, expected lifetime equals 1 / monthly churn. Contribution margin per month times expected lifetime equals LTV.' },
+    { q: 'What if churn is not constant?', a: 'Fit an actual retention curve and integrate. This calculator uses the simple constant-churn approximation because most stages of SaaS are close enough for a decision.' },
+    { q: 'Should I use gross margin or contribution margin?', a: 'Contribution margin (revenue minus variable cost to serve) is more accurate. Gross margin is a reasonable proxy for early-stage SaaS.' },
+    { q: 'Is 3:1 always the target?', a: 'It is a benchmark, not a law. A 3:1 with 24-month payback burns cash. A 2:1 with a 6-month payback can be fine.' },
+    { q: 'How does this handle expansion revenue?', a: 'It does not. Add net revenue retention effects by adjusting ARPU upward or churn downward (negative churn).' },
+  ]}
+  related={["mrr-arr-growth", "quick-ratio", "rule-of-40"]}
+>
+  <LtvCacCalculator client:load />
+</CalculatorLayout>
